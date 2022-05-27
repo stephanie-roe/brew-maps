@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import '../Styles/App.css';
 
 // state is going to have one key which is breweries
   // breweries is an array that contains objects which are the interface of brewery
@@ -37,7 +36,7 @@ class App extends React.Component<{}, State> {
     breweries: [],
   }
 
-// invoking our fetch and then setting the state to include all of the brewery data we just received from our promise 
+// invoking our fetch and then setting the state to include all of the brewery data we just received from our promise
   componentDidMount() {
     this.getAllBreweries().then(breweries => this.setState(state => ({ breweries: breweries })))
   }
