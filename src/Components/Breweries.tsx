@@ -17,7 +17,7 @@ const Breweries = ({ newBrewery }: BreweriesProps): JSX.Element => {
     )
   })
   return (
-    <div>
+    <div className='breweries'>
       {result}
     </div>
   )
