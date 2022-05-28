@@ -1,4 +1,7 @@
 * {
   font-family: 'Averia Serif Libre', cursive;
-  /* font-family: 'News Cycle', sans-serif; */
+}
+
+h1 {
+  text-align: center;
 }
