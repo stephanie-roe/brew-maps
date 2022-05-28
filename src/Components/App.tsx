@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../Styles/App.css';
+import Breweries from './Breweries';
 
 // state is going to have one key which is breweries
   // breweries is an array that contains objects which are the interface of brewery
@@ -9,7 +10,7 @@ type State = {
 
 // Brewery is an object that has all of these keys, which have specified data types as their values
   // each element in our breweries state is one of these objects
-interface Brewery {
+type Brewery = {
   id: string,
   name: string,
   brewery_type: string,
@@ -55,10 +56,11 @@ class App extends React.Component<{}, State> {
     console.log(breweries)
     return (
       <div>
-      <h1>HI</h1>
+        <Breweries newBrewery={breweries}/>
       </div>
     )
   }
 }
+
 
 export default App;
