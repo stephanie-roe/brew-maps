@@ -3,7 +3,10 @@ import '../Styles/Breweries.css';
 import Brewery from './Brewery';
 
 type BreweriesProps = {
-  newBrewery: object[]
+  newBrewery: {
+    name: string,
+    state: string
+  }[]
 }
 
 const Breweries = ({ newBrewery }: BreweriesProps): JSX.Element => {
