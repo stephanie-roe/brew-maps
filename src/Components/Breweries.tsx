@@ -5,6 +5,7 @@ import Brewery from './Brewery';
 type BreweriesProps = {
   newBrewery: {
     name: string,
+    city: string,
     state: string
   }[]
 }

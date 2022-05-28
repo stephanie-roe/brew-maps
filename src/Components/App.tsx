@@ -55,7 +55,8 @@ class App extends React.Component<{}, State> {
     const { breweries } = this.state
     console.log(breweries)
     return (
-      <div>
+      <div className='app'>
+        <h1>Brew Maps</h1>
         <Breweries newBrewery={breweries}/>
       </div>
     )
