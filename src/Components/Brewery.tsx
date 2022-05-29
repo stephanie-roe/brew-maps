@@ -13,7 +13,7 @@ type BreweryProps = {
 
 const Brewery = ({ breweryObject }: BreweryProps): JSX.Element => {
   return (
-    <Link to={`/${breweryObject.id}`}>
+    <Link to={`/${breweryObject.id}`} style={{textDecoration: 'none', color: 'black'}}>
       <div className='brewery'>
         <h2>{breweryObject.name}</h2>
         <p>{`${breweryObject.city}, ${breweryObject.state}`}</p>
