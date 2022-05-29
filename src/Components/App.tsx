@@ -3,8 +3,11 @@ import '../Styles/App.css';
 import Breweries from './Breweries';
 import Brewery from './Brewery';
 import BreweryDetails from './BreweryDetails'
-import { Route } from 'react-router-dom'
+import { Route, RouteComponentProps } from 'react-router-dom'
 
+interface matchParams {
+  id: string;
+}
 // state is going to have one key which is breweries
   // breweries is an array that contains objects which are the interface of brewery
 type State = {
@@ -57,15 +60,6 @@ class App extends React.Component<{}, State> {
     this.getAllBreweries().then(breweries => this.setState(state => ({ breweries: breweries })))
   }
 
-  // findBrewery({ id }: id) {
-  //   this.state.breweries.find((brewery) => {
-  //     return brewery.id === id
-  //   })
-  // }
-
-  // handleClick (event: React.ChangeEvent<HTMLInputElement>) {
-  //   console.log(event)
-  // }
 
 // this method is given a type (<Brewery[]> --> going to be an array and everything in that array will be this Brewery object). the type communicates our anticipated outcome. We are expecting a promise which is an array that contains Brewery objects
   getAllBreweries = (): Promise<Brewery[]> => {
@@ -85,8 +79,7 @@ class App extends React.Component<{}, State> {
         <Route exact path="/">
             <Breweries newBrewery={breweries} />
         </Route>
-        <Route path="/:id">
-            <BreweryDetails />
+        <Route path="/:id" component={ ({matchParams}) => <BreweryDetails /> } > 
         </Route>
       </main>
     )
