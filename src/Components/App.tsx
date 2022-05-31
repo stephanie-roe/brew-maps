@@ -5,7 +5,7 @@ import Brewery from './Brewery';
 import BreweryDetails from './BreweryDetails'
 import { Route, RouteComponentProps } from 'react-router-dom'
 
-interface matchParams {
+interface match {
   id: string;
 }
 // state is going to have one key which is breweries
@@ -17,24 +17,24 @@ type State = {
 
 // Brewery is an object that has all of these keys, which have specified data types as their values
   // each element in our breweries state is one of these objects
-type Brewery = {
+export type Brewery = {
   id: string,
   name: string,
   brewery_type: string,
   street: string,
-  address_2: string,
-  address_3: string,
+  address_2?: string,
+  address_3?: string,
   city: string,
   state: string,
-  county_province: string,
+  county_province?: string,
   postal_code: string,
-  country: string,
-  longitude: string,
-  latitude: string,
+  country?: string,
+  longitude?: string,
+  latitude?: string,
   phone: string,
   website_url: string,
-  updated_at: string,
-  created_at: string
+  updated_at?: string,
+  created_at?: string
 }
 
 // type id ={
@@ -44,6 +44,7 @@ type Brewery = {
 // type specificBrew={
 //   brewery: object
 // }
+
 
 
 
@@ -65,9 +66,9 @@ class App extends React.Component<{}, State> {
   getAllBreweries = (): Promise<Brewery[]> => {
     return fetch('https://api.openbrewerydb.org/breweries')
       .then(response => response.json())
-      .then(data => {
-        return data as Brewery[]
-      })
+      // .then(data => {
+      //   return data as Brewery[]
+      // })
   }
 
   render() {
@@ -79,7 +80,7 @@ class App extends React.Component<{}, State> {
         <Route exact path="/">
             <Breweries newBrewery={breweries} />
         </Route>
-        <Route path="/:id" component={ ({matchParams}) => <BreweryDetails /> } > 
+        <Route path="/:id" render={ ({match}) => <BreweryDetails id={match.params.id} /> } >
         </Route>
       </main>
     )
