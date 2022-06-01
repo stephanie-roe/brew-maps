@@ -74,13 +74,16 @@ class App extends React.Component<{}, State> {
       // })
   }
 
-  searchBrewery = (query: string, event: any): boolean => {
+  searchBrewery = (query: string, event: any): void => {
     event.preventDefault()
     const result = this.state.breweries.filter(brewery => {
       return brewery.name.includes(query)
     })
     this.setState({ searchedBreweries: result })
-    return true
+  }
+
+  clearSearchBreweries = (): void => {
+    this.setState({ searchedBreweries: [] })
   }
 
   render() {
@@ -89,7 +92,7 @@ class App extends React.Component<{}, State> {
     return (
       <main className='app'>
         {/* <h1>Brew Maps</h1> */}
-        <NavBar searchBrewery={this.searchBrewery} />
+        <NavBar searchBrewery={this.searchBrewery} clearSearchBreweries={this.clearSearchBreweries} />
         <Route exact path="/">
         {this.state.searchedBreweries.length ? <Breweries newBrewery={this.state.searchedBreweries} /> : <Breweries newBrewery={this.state.breweries} />}
         </Route>

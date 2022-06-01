@@ -5,7 +5,8 @@ import '../Styles/NavBar.css';
 
 
 type NavBarProps = {
-  searchBrewery: (query: string, event: any) => boolean
+  searchBrewery: (query: string, event: any) => void,
+  clearSearchBreweries: () => void
 }
 
 type NavBarState={
@@ -24,6 +25,12 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
     this.props.searchBrewery(this.state.query, event)
   }
 
+  clearInputs = () => {
+    // event.target.value = ''
+    this.setState({ query: '' })
+    this.props.clearSearchBreweries()
+  }
+
 
     render() {
         return(
@@ -31,7 +38,7 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
                 {/* <button>Home</button> */}
                 <div className='home-btn-container'>
                     <Link to='/'>
-                        <button className='home-btn'>Home</button>
+                        <button className='home-btn' onClick={() => this.clearInputs()}>Home</button>
                     </Link>
                 </div>
                 <div className='title-container'>
