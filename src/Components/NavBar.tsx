@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import '../Styles/NavBar.css';
 
 type NavBarState={
@@ -16,7 +17,9 @@ class NavBar extends Component {
             <div className='nav-bar'>
                 {/* <button>Home</button> */}
                 <div className='home-btn-container'>
-                    <button className='home-btn'>Home</button>
+                    <Link to='/'>
+                        <button className='home-btn'>Home</button>
+                    </Link>
                 </div>
                 <div className='title-container'>
                     <h1>Brew Maps</h1>
