@@ -77,7 +77,7 @@ class App extends React.Component<{}, State> {
     // console.log(breweries)
     return (
       <main className='app'>
-        <h1>Brew Maps</h1>
+        {/* <h1>Brew Maps</h1> */}
         <NavBar />
         <Route exact path="/">
             <Breweries newBrewery={breweries} />
