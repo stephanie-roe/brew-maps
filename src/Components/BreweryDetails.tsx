@@ -1,5 +1,6 @@
 import React from 'react';
-import { Brewery } from "./App"
+import "../Styles/BreweryDetails.css"
+import { Brewery } from "./App";
 
 type DetailsProps = Pick<Brewery, "id">
 
@@ -59,13 +60,17 @@ class BreweryDetails extends React.Component<DetailsProps, DetailsState> {
 
     render() {
         return(
-            <div>
-                <h2>{this.state.brewery.name}</h2>
-                <p>{this.state.brewery.website_url}</p>
-                <p>{this.state.brewery.phone}</p>
-                <p>{this.state.brewery.street}</p>
-                <p>{`${this.state.brewery.city}, ${this.state.brewery.state} ${this.state.brewery.postal_code}`}</p>
-                <button>{this.state.brewery.brewery_type}</button>
+            <div className="brewery-details">
+                <div className="details-card">
+                  <h2>{this.state.brewery.name}</h2>
+                  <button>{this.state.brewery.brewery_type}</button>
+                  <div className="contact-info">
+                    <p>{this.state.brewery.website_url}</p>
+                    <p>{this.state.brewery.phone}</p>
+                    <p>{this.state.brewery.street}</p>
+                    <p>{`${this.state.brewery.city}, ${this.state.brewery.state} ${this.state.brewery.postal_code}`}</p>
+                  </div>
+                </div>
             </div>
         )
     }
