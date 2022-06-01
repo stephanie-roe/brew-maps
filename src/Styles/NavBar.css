@@ -3,6 +3,16 @@
     width: 100vw;
     border: 2px solid red;
     align-items: center;
+    justify-content: space-around;
+
+}
+
+h1 {
+    border: 2px solid green;
+}
+
+.home-btn {
+    border: 2px solid orange;
 }
 
 .brew-types {
@@ -17,6 +27,24 @@
     position: relative;
     display: inline-block;
     border: 2px solid blue;
+}
+
+.home-btn-container {
+    border: 2px solid purple;
+}
+
+.filter-search-container,
+.title-container,
+.home-btn-container {
+    width: 30%;
+}
+
+.filter-search-container {
+    border: 2px solid green;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .dropdown-content {

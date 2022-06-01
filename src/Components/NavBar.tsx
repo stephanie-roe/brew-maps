@@ -15,20 +15,26 @@ class NavBar extends Component {
         return(
             <div className='nav-bar'>
                 {/* <button>Home</button> */}
+                <div className='home-btn-container'>
                     <button className='home-btn'>Home</button>
-                    <h1>Brew Maps</h1>
-                <div className='dropdown'>
-                    <button className='brew-types'>Filter</button>
-                    <form className='dropdown-content'>
-                        <a href='#'>Action</a>
-                        <a href='#'>Adventure</a>
-                        <a href='#'>Horror</a>
-                        <a href='#'>Comedy</a>
-                    </form>
                 </div>
+                <div className='title-container'>
+                    <h1>Brew Maps</h1>
+                </div>
+                <div className='filter-search-container'>
+                    <div className='dropdown'>
+                        <button className='brew-types'>Filter</button>
+                        <form className='dropdown-content'>
+                            <a href='#'>Action</a>
+                            <a href='#'>Adventure</a>
+                            <a href='#'>Horror</a>
+                            <a href='#'>Comedy</a>
+                        </form>
+                    </div>
                     <form>
                         <input type='text' placeholder='ex: Banjo Brewing'></input>
                     </form>
+                </div>
             </div>
         )
     }
