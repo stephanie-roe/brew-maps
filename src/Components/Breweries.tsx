@@ -6,7 +6,8 @@ type BreweriesProps = {
   newBrewery: {
     name: string,
     city: string,
-    state: string
+    state: string,
+    id: string
   }[]
 }
 
