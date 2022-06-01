@@ -3,6 +3,7 @@ import '../Styles/App.css';
 import Breweries from './Breweries';
 import Brewery from './Brewery';
 import BreweryDetails from './BreweryDetails'
+import NavBar from './NavBar';
 import { Route, RouteComponentProps } from 'react-router-dom'
 
 interface match {
@@ -77,6 +78,7 @@ class App extends React.Component<{}, State> {
     return (
       <main className='app'>
         <h1>Brew Maps</h1>
+        <NavBar />
         <Route exact path="/">
             <Breweries newBrewery={breweries} />
         </Route>
