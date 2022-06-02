@@ -55,7 +55,7 @@ class NavBar extends React.Component<NavBarProps, NavBarState> {
                         </form>
                     </div>
                     <form>
-                        <input type='text' placeholder='ex: Banjo Brewing' onChange={(event) => this.handleChange(event)}></input>
+                        <input className='search-bar' type='text' placeholder='ex: Banjo Brewing' onChange={(event) => this.handleChange(event)}></input>
 
                     </form>
                 </div>
