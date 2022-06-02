@@ -66,9 +66,9 @@ class BreweryDetails extends React.Component<DetailsProps, DetailsState> {
                   <button>{this.state.brewery.brewery_type}</button>
                   <div className="contact-info">
                     <p>{this.state.brewery.website_url}</p>
-                    <p>{this.state.brewery.phone}</p>
+                    <p className='phone'>Phone: {this.state.brewery.phone}</p>
                     <p>{this.state.brewery.street}</p>
-                    <p>{`${this.state.brewery.city}, ${this.state.brewery.state} ${this.state.brewery.postal_code}`}</p>
+                    <p className='address'>Address: {`${this.state.brewery.city}, ${this.state.brewery.state} ${this.state.brewery.postal_code}`}</p>
                   </div>
                 </div>
             </div>

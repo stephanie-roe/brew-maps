@@ -70,7 +70,9 @@ class App extends React.Component<{}, State> {
 // this method is given a type (<Brewery[]> --> going to be an array and everything in that array will be this Brewery object). the type communicates our anticipated outcome. We are expecting a promise which is an array that contains Brewery objects
   getAllBreweries = (): Promise<Brewery[]> => {
     return fetch('https://api.openbrewerydb.org/breweries')
-      .then(response => response.json())
+      .then(response => {
+        console.log(response)
+        return response.json()})
       // .then(data => {
       //   return data as Brewery[]
       // })
