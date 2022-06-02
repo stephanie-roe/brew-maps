@@ -5,6 +5,7 @@ import Brewery from './Brewery';
 import BreweryDetails from './BreweryDetails'
 import NavBar from './NavBar';
 import { Route, RouteComponentProps } from 'react-router-dom'
+import { threadId } from 'worker_threads';
 
 interface match {
   id: string
@@ -14,8 +15,8 @@ interface match {
 type State = {
   breweries: Brewery[],
   searchedBreweries: Brewery[],
-  error: boolean
-  // specificBrewery: {}
+  error: boolean,
+  query: string
 }
 
 // Brewery is an object that has all of these keys, which have specified data types as their values
@@ -57,8 +58,8 @@ class App extends React.Component<{}, State> {
   state: State = {
     breweries: [],
     searchedBreweries: [],
-    error: false
-    // specificBrewery: {}
+    error: false,
+    query: ""
   }
 
 // invoking our fetch and then setting the state to include all of the brewery data we just received from our promise
@@ -78,31 +79,18 @@ class App extends React.Component<{}, State> {
       // })
   }
 
-  searchBrewery = (query: string, event: any): void => {
-    event.preventDefault()
-    const result = this.state.breweries.filter(brewery => {
-      return brewery.name.includes(query)
-    })
-    // const result = this.state.breweries.reduce((acc, brewery) => {
-    //   if (query.length > 0 && brewery.name.includes(query)) {
-    //     acc.push(brewery)
-    //   // } else if (query.length === 0) {
-    //   //   this.setState({ error: false, searchedBreweries: [] })
-    //   }
-    //   return acc
-    // }, [])
+  searchBrewery = (event: any): void => {
+    this.setState({query: event.target.value, searchedBreweries: this.state.breweries});
 
-    if (result.length > 0) {
-      this.setState({ searchedBreweries: result, error: false })
-    // } else if (query.length === 0) {
-    //   this.setState({ error: false, searchedBreweries: [] })
-    } else {
-      this.setState({ error: true })
-    }
+    const result = this.state.breweries.filter(brewery => {
+      return brewery.name.toUpperCase().includes(event.target.value.toUpperCase());
+    });
+
+    this.setState({searchedBreweries: result})
   }
 
   clearSearchBreweries = (): void => {
-    this.setState({ searchedBreweries: [], error: false })
+    this.setState({ searchedBreweries: [], error: false, query: "" })
   }
 
   render() {
@@ -111,12 +99,12 @@ class App extends React.Component<{}, State> {
     return (
       <main className='app'>
         {/* <h1>Brew Maps</h1> */}
-        <NavBar searchBrewery={this.searchBrewery} clearSearchBreweries={this.clearSearchBreweries} />
+        <NavBar searchBrewery={this.searchBrewery} clearSearchBreweries={this.clearSearchBreweries} query={this.state.query}/>
         <Route exact path="/"
           render={() => {
             if (this.state.searchedBreweries.length && !this.state.error) {
               return (<Breweries newBrewery={this.state.searchedBreweries} />)
-            } else if (this.state.searchedBreweries && !this.state.error) {
+            } else if (!this.state.searchedBreweries.length && !this.state.error) {
               return (<Breweries newBrewery={this.state.breweries} />)
             } else if (this.state.error) {
               return (<h1>Sorry, come back later!</h1>)
