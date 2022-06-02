@@ -13,7 +13,8 @@ interface match {
   // breweries is an array that contains objects which are the interface of brewery
 type State = {
   breweries: Brewery[],
-  searchedBreweries: Brewery[]
+  searchedBreweries: Brewery[],
+  error: boolean
   // specificBrewery: {}
 }
 
@@ -55,7 +56,8 @@ export type Brewery = {
 class App extends React.Component<{}, State> {
   state: State = {
     breweries: [],
-    searchedBreweries: []
+    searchedBreweries: [],
+    error: false
     // specificBrewery: {}
   }
 
@@ -79,11 +81,26 @@ class App extends React.Component<{}, State> {
     const result = this.state.breweries.filter(brewery => {
       return brewery.name.includes(query)
     })
-    this.setState({ searchedBreweries: result })
+    // const result = this.state.breweries.reduce((acc, brewery) => {
+    //   if (query.length > 0 && brewery.name.includes(query)) {
+    //     acc.push(brewery)
+    //   // } else if (query.length === 0) {
+    //   //   this.setState({ error: false, searchedBreweries: [] })
+    //   }
+    //   return acc
+    // }, [])
+
+    if (result.length > 0) {
+      this.setState({ searchedBreweries: result, error: false })
+    // } else if (query.length === 0) {
+    //   this.setState({ error: false, searchedBreweries: [] })
+    } else {
+      this.setState({ error: true })
+    }
   }
 
   clearSearchBreweries = (): void => {
-    this.setState({ searchedBreweries: [] })
+    this.setState({ searchedBreweries: [], error: false })
   }
 
   render() {
@@ -93,8 +110,17 @@ class App extends React.Component<{}, State> {
       <main className='app'>
         {/* <h1>Brew Maps</h1> */}
         <NavBar searchBrewery={this.searchBrewery} clearSearchBreweries={this.clearSearchBreweries} />
-        <Route exact path="/">
-        {this.state.searchedBreweries.length ? <Breweries newBrewery={this.state.searchedBreweries} /> : <Breweries newBrewery={this.state.breweries} />}
+        <Route exact path="/"
+          render={() => {
+            if (this.state.searchedBreweries.length && !this.state.error) {
+              return (<Breweries newBrewery={this.state.searchedBreweries} />)
+            } else if (this.state.searchedBreweries && !this.state.error) {
+              return (<Breweries newBrewery={this.state.breweries} />)
+            } else if (this.state.error) {
+              return (<h1>Sorry, come back later!</h1>)
+            }
+          }}
+          >
         </Route>
         <Route path="/:id" render={ ({match}) => <BreweryDetails id={match.params.id} /> } >
         </Route>
