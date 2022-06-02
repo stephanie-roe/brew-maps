@@ -25,6 +25,4 @@ describe('Home page', () => {
       cy.get('.search-bar').should('have.attr', 'placeholder').should('include', 'ex: Banjo Brewing')
     })
 
-
-
 })
