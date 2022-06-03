@@ -1,6 +1,7 @@
 import React from 'react';
 import '../Styles/ReviewForm.css';
 import { Route, RouteComponentProps } from 'react-router-dom';
+import Review from './Review';
 
 type ReviewFormProps = {
     id: string
@@ -13,7 +14,7 @@ type ReviewFormState = {
     // do we need id here?
 }
 
-type ReviewObject = {
+export type ReviewObject = {
     id: string,
     name: string,
     content: string
