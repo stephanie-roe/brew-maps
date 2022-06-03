@@ -38,6 +38,7 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
         })
         .then(data => {
             const filteredData = data.filter(review => review.id === this.props.id)
+            this.setState({ reviews: filteredData })
         })
         .catch(error => console.log("error"))
     }
