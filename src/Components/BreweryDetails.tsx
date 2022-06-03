@@ -1,5 +1,6 @@
 import React from 'react';
-import "../Styles/BreweryDetails.css"
+import "../Styles/BreweryDetails.css";
+import ReviewForm from './ReviewForm';
 import { Brewery } from "./App";
 
 type DetailsProps = Pick<Brewery, "id">
@@ -71,6 +72,7 @@ class BreweryDetails extends React.Component<DetailsProps, DetailsState> {
                     <p className='address'>Address: {`${this.state.brewery.city}, ${this.state.brewery.state} ${this.state.brewery.postal_code}`}</p>
                   </div>
                 </div>
+                <ReviewForm id={this.state.brewery.id}/>
             </div>
         )
     }

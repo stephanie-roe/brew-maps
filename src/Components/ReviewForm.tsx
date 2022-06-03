@@ -27,7 +27,19 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
     }
 
     componentDidMount() {
-        // fetch reviews by id 
+        console.log(this.props.id)
+        fetch(`http://localhost:3001/api/v1/reviews`)
+        .then(response => {
+            if (response.ok) {
+                return response.json()
+            } else {
+                throw Error(response.statusText)
+            }
+        })
+        .then(data => {
+            const filteredData = data.filter(review => review.id === this.props.id)
+        })
+        .catch(error => console.log("error"))
     }
 
     render() {
