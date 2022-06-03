@@ -7,14 +7,14 @@ type ReviewFormProps = {
 }
 
 type ReviewFormState = {
-    reviews: ReviewObject[], 
+    reviews: ReviewObject[],
     name: string,
     content: string,
-    // do we need id here? 
+    // do we need id here?
 }
 
 type ReviewObject = {
-    id: string, 
+    id: string,
     name: string,
     content: string
 }
@@ -22,7 +22,7 @@ type ReviewObject = {
 class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
     state: ReviewFormState = {
         name: "",
-        content: "", 
+        content: "",
         reviews: []
     }
 
@@ -44,15 +44,20 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
     }
 
     render() {
-        return (
-            // we will render the form as well as map over the reviews and show them on the DOM. 
-            <div></div>
-        )
+      const result = this.state.reviews.map(review => {
+        return <Review details={review} key={this.state.reviews.indexOf(review)} />
+      })
+      return (
+            // we will render the form as well as map over the reviews and show them on the DOM.
+        <div className='reviews'>
+          {result}
+        </div>
+      )
     }
 
-    //review form is the container that holds the form for review submission and the individual review components. 
+    //review form is the container that holds the form for review submission and the individual review components.
 
 
 }
 
-export default ReviewForm; 
+export default ReviewForm;
