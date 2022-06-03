@@ -5,7 +5,7 @@ import Brewery from './Brewery';
 import BreweryDetails from './BreweryDetails'
 import NavBar from './NavBar';
 import { Route, RouteComponentProps } from 'react-router-dom'
-import { threadId } from 'worker_threads';
+// import { threadId } from 'worker_threads';
 
 interface match {
   id: string
