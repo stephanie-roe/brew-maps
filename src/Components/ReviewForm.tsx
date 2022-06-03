@@ -10,38 +10,38 @@ type ReviewFormProps = {
 type ReviewFormState = {
     reviews: ReviewObject[],
     name: string,
-    content: string,
+    review: string,
     // do we need id here?
 }
 
 export type ReviewObject = {
     id: string,
     name: string,
-    content: string
+    review: string
 }
 
 class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
     state: ReviewFormState = {
         name: "",
-        content: "",
+        review: "",
         reviews: []
     }
 
     componentDidMount() {
-        console.log(this.props.id)
-        fetch(`http://localhost:3001/api/v1/reviews`)
-        .then(response => {
-            if (response.ok) {
-                return response.json()
-            } else {
-                throw Error(response.statusText)
-            }
-        })
-        .then(data => {
-            const filteredData = data.filter(review => review.id === this.props.id)
-            this.setState({ reviews: filteredData })
-        })
-        .catch(error => console.log("error"))
+        // console.log(this.props.id)
+      fetch(`http://localhost:3001/api/v1/reviews`)
+      .then(response => {
+          if (response.ok) {
+              return response.json()
+          } else {
+              throw Error(response.statusText)
+          }
+      })
+      .then(data => {
+          const filteredData = data.filter(review => review.id === this.props.id)
+          this.setState({ reviews: filteredData })
+      })
+      .catch(error => console.log("error"))
     }
 
     render() {
@@ -49,9 +49,16 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
         return <Review details={review} key={this.state.reviews.indexOf(review)} />
       })
       return (
-            // we will render the form as well as map over the reviews and show them on the DOM.
-        <div className='reviews'>
-          {result}
+        <div>
+          <form className='review-form'>
+            <input className='name' type='text' placeholder='name (optional)' value={this.state.name} />
+            <input className='review-contents' type='text' placeholder='review here' value={this.state.review} />
+            <button className='submit-review-btn'>Submit Review</button>
+          </form>
+          <div className='reviews'>
+            {result}
+          </div>
+
         </div>
       )
     }

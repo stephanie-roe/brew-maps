@@ -7,10 +7,11 @@ type ReviewProps = {
 }
 
 const Review = ({ details }: ReviewProps): JSX.Element => {
+  // console.log(details)
   return (
     <div className='review' id={details.id}>
       <p>{details.name}</p>
-      <p>{details.content}</p>
+      <p>{details.review}</p>
     </div>
   )
 }
