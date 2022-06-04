@@ -17,7 +17,9 @@ type State = {
   breweries: Brewery[],
   searchedBreweries: Brewery[],
   error: boolean,
-  query: string
+  query: string,
+  reviews: ReviewObject[],
+  reviewsByBrewery: ReviewObject[]
 }
 
 export type Brewery = {
@@ -45,16 +47,22 @@ class App extends React.Component<{}, State> {
     breweries: [],
     searchedBreweries: [],
     error: false,
-    query: ""
+    query: '',
+    reviews: [],
+    reviewsByBrewery: []
   }
 
 
   componentDidMount() {
     this.getAllBreweries().then(breweries => this.setState(state => ({ breweries: breweries })))
+    this.fetchData().then(data => {
+      console.log("ressssD", data);
+      this.setState({ reviews: data })
+    })
   }
 
-  async function fetchData(): any {
-    fetch(`http://localhost:3001/api/v1/reviews`)
+  fetchData = (): Promise<ReviewObject[]> => {
+    return fetch(`http://localhost:3001/api/v1/reviews`)
       .then(response => {
           if (response.ok) {
               return response.json()
@@ -62,10 +70,10 @@ class App extends React.Component<{}, State> {
               throw Error(response.statusText)
           }
       })
-      .then(data => {
-        console.log("ressssD", data);
-        return data
-      })
+      // .then(data => {
+      //   console.log("ressssD", data);
+      //   this.setState({ reviews: data })
+      // })
       .catch(error => console.log("error"))
 
   }
@@ -79,17 +87,35 @@ class App extends React.Component<{}, State> {
 
   searchBrewery = (event: any): void => {
     this.setState({query: event.target.value, searchedBreweries: this.state.breweries});
-
     const result = this.state.breweries.filter(brewery => {
       return brewery.name.toUpperCase().includes(event.target.value.toUpperCase());
     });
-
     this.setState({searchedBreweries: result})
   }
-
   clearSearchBreweries = (): void => {
     this.setState({ searchedBreweries: [], error: false, query: "" })
   }
+
+
+  filterBreweryReviews = (id: string): void => {
+    const filteredData = this.state.reviews.filter(review => {
+      return review.id === id})
+    this.setState({ reviewsByBrewery: filteredData })
+  }
+
+  updateReviews = (reviews: ReviewObject[], filteredReviews: ReviewObject[]): void => {
+    reviews.forEach(review => {
+      if (!this.state.reviews.includes(review)) {
+        this.setState({ reviews: [...this.state.reviews, review] })
+      }
+    })
+    filteredReviews.forEach(review => {
+      if (!this.state.reviewsByBrewery.includes(review)) {
+        this.setState({ reviewsByBrewery: [...this.state.reviewsByBrewery, review] })
+      }
+    })
+  }
+
 
   render() {
     return (
@@ -98,16 +124,16 @@ class App extends React.Component<{}, State> {
         <Route exact path="/"
           render={() => {
             if (!this.state.searchedBreweries.length && !this.state.query) {
-              return (<Breweries newBrewery={this.state.breweries} />)
+              return (<Breweries filterReviews={this.filterBreweryReviews} newBrewery={this.state.breweries} />)
             } else if (!this.state.searchedBreweries.length) {
               return (<h1>Oops, try again later!</h1>)
             } else {
-              return (<Breweries newBrewery={this.state.searchedBreweries} />)
+              return (<Breweries filterReviews={this.filterBreweryReviews} newBrewery={this.state.searchedBreweries} />)
             }
           }}
           >
         </Route>
-        <Route path="/:id" render={ ({match}) => <BreweryDetails fetchData={this.fetchData} id={match.params.id} /> } >
+        <Route path="/:id" render={ ({match}) => <BreweryDetails refresh={this.updateReviews} filteredReviews={this.state.reviewsByBrewery} reviews={this.state.reviews} id={match.params.id} /> } >
         </Route>
       </main>
     )

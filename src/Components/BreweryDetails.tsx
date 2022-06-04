@@ -7,8 +7,10 @@ import { ReviewObject } from './ReviewForm';
 // type DetailsProps = Pick<Brewery, "id">
 
 type DetailsProps = {
+  refresh: (reviews: ReviewObject[], filteredReviews: ReviewObject[]) => void,
+  filteredReviews: ReviewObject[],
   id: string,
-  fetchData: () => any
+  reviews: ReviewObject[]
 
 }
 
@@ -79,7 +81,7 @@ class BreweryDetails extends React.Component<DetailsProps, DetailsState> {
                     <p className='address'>Address: {`${this.state.brewery.city}, ${this.state.brewery.state} ${this.state.brewery.postal_code}`}</p>
                   </div>
                 </div>
-                <ReviewForm fetchData={this.props.fetchData} id={this.state.brewery.id}/>
+                <ReviewForm refresh={this.props.refresh} filteredReviews={this.props.filteredReviews} reviews={this.props.reviews} id={this.state.brewery.id}/>
             </div>
         )
     }

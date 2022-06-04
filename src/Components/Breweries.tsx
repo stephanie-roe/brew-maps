@@ -3,6 +3,7 @@ import '../Styles/Breweries.css';
 import Brewery from './Brewery';
 
 type BreweriesProps = {
+  filterReviews: (id: string) => void,
   newBrewery: {
     name: string,
     city: string,
@@ -11,10 +12,10 @@ type BreweriesProps = {
   }[]
 }
 
-const Breweries = ({ newBrewery }: BreweriesProps): JSX.Element => {
+const Breweries = ({ newBrewery, filterReviews }: BreweriesProps): JSX.Element => {
   const result = newBrewery.map(singleBrewery => {
     return (
-      <Brewery breweryObject={singleBrewery} key={newBrewery.indexOf(singleBrewery)} />
+      <Brewery filterReviews={filterReviews} breweryObject={singleBrewery} key={newBrewery.indexOf(singleBrewery)} />
     )
   })
   return (

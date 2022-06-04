@@ -4,21 +4,23 @@ import { Route, RouteComponentProps } from 'react-router-dom';
 import Review from './Review';
 
 type ReviewFormProps = {
-    id: string,
-    fetchData: () => any
+  refresh: (reviews: ReviewObject[], filteredReviews: ReviewObject[]) => void,
+  filteredReviews: ReviewObject[],
+  id: string,
+  reviews: ReviewObject[]
 }
 
 type ReviewFormState = {
-    reviews: ReviewObject[],
-    id: string,
-    name: string,
-    review: string
+  filteredReviews: ReviewObject[],
+  id: string,
+  name: string,
+  review: string
 }
 
 export type ReviewObject = {
-    id: string,
-    name: string,
-    review: string
+  id: string,
+  name: string,
+  review: string
 }
 
 class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
@@ -26,7 +28,7 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
         id: this.props.id,
         name: '',
         review: '',
-        reviews: []
+        filteredReviews: this.props.filteredReviews
     }
 
     // componentDidMount() {
@@ -46,14 +48,27 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
     //   .catch(error => console.log("error"))
     // }
 
-    componentDidMount() {
-      const data = this.props.fetchData()
-        const filteredData = await data.filter(review => review.id === this.props.id)
-        this.setState({ reviews: filteredData })
+    // componentDidMount() {
+    //     const filteredData = this.props.reviews.filter(review => {
+    //       console.log("revvvv", review);
+    //       console.log("id", this.props.id);
+    //
+    //
+    //       return review.id === this.props.id})
+    //     console.log("filterrr", filteredData);
+    //
+    //     this.setState({ filteredReviews: filteredData })
+    //   }
+
+        // const filteredData = data.filter(review => review.id === this.props.id)
+        // this.setState({ reviews: filteredData })
       // console.log(data);
 
       // const filteredData = data.filter(review => review.id === this.props.id)
       // this.setState({ reviews: filteredData })
+
+    componentDidMount() {
+      this.setState({ filteredReviews: this.props.filteredReviews })
     }
 
 
@@ -89,21 +104,21 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
         }
       })
       .then(data => {
-        this.setState({ reviews: [...this.state.reviews, {
+        this.setState({ filteredReviews: [...this.state.filteredReviews, {
         id: this.props.id,
         name: this.state.name,
         review: this.state.review
        }] })
       })
-      .catch(error => console.log('errrrror')
-      )
+      .catch(error => console.log('errrrror'))
+      this.props.refresh(this.props.reviews, this.props.filteredReviews)
     }
 
 
 
     render() {
-      const result = this.state.reviews.map(review => {
-        return <Review details={review} key={this.state.reviews.indexOf(review)} />
+      const result = this.state.filteredReviews.map(review => {
+        return <Review details={review} key={this.state.filteredReviews.indexOf(review)} />
       })
       return (
         <div>
