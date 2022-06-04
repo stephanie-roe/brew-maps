@@ -4,7 +4,8 @@ import Breweries from './Breweries';
 import Brewery from './Brewery';
 import BreweryDetails from './BreweryDetails'
 import NavBar from './NavBar';
-import { Route, RouteComponentProps } from 'react-router-dom'
+import { Route, RouteComponentProps } from 'react-router-dom';
+import ReviewForm from './ReviewForm';
 // import { threadId } from 'worker_threads';
 
 interface match {
