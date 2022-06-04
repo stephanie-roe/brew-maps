@@ -2,32 +2,19 @@ import React from 'react';
 import "../Styles/BreweryDetails.css";
 import ReviewForm from './ReviewForm';
 import { Brewery } from "./App";
+import { ReviewObject } from './ReviewForm';
 
-type DetailsProps = Pick<Brewery, "id">
+type DetailsProps = {
+  refresh: (reviews: ReviewObject[], filteredReviews: ReviewObject[]) => void,
+  filteredReviews: ReviewObject[],
+  id: string,
+  reviews: ReviewObject[]
 
-type DetailsState = {
-    brewery: Brewery
 }
 
-// type Brewery = {
-//     id: string,
-//     name: string,
-//     brewery_type: string,
-//     street: string,
-//     address_2: string,
-//     address_3: string,
-//     city: string,
-//     state: string,
-//     county_province: string,
-//     postal_code: string,
-//     country: string,
-//     longitude: string,
-//     latitude: string,
-//     phone: string,
-//     website_url: string,
-//     updated_at: string,
-//     created_at: string
-//   }
+type DetailsState = {
+  brewery: Brewery
+}
 
 class BreweryDetails extends React.Component<DetailsProps, DetailsState> {
     state: DetailsState ={
@@ -72,7 +59,7 @@ class BreweryDetails extends React.Component<DetailsProps, DetailsState> {
                     <p className='address'>Address: {`${this.state.brewery.city}, ${this.state.brewery.state} ${this.state.brewery.postal_code}`}</p>
                   </div>
                 </div>
-                <ReviewForm id={this.state.brewery.id}/>
+                <ReviewForm refresh={this.props.refresh} filteredReviews={this.props.filteredReviews} reviews={this.props.reviews} id={this.state.brewery.id}/>
             </div>
         )
     }
