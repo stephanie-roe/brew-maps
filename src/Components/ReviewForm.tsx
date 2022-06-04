@@ -2,6 +2,8 @@ import React from 'react';
 import '../Styles/ReviewForm.css';
 import { Route, RouteComponentProps } from 'react-router-dom';
 import Review from './Review';
+import { Link } from 'react-router-dom'
+import ConfirmationPage from './ConfirmationPage'
 
 type ReviewFormProps = {
   refresh: (reviews: ReviewObject[], filteredReviews: ReviewObject[]) => void,
@@ -14,7 +16,8 @@ type ReviewFormState = {
   filteredReviews: ReviewObject[],
   id: string,
   name: string,
-  review: string
+  review: string,
+  submissionStatus: boolean
 }
 
 export type ReviewObject = {
@@ -28,7 +31,8 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
         id: this.props.id,
         name: '',
         review: '',
-        filteredReviews: this.props.filteredReviews
+        filteredReviews: this.props.filteredReviews,
+        submissionStatus: false
     }
 
     componentDidMount() {
@@ -42,6 +46,8 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
       } else if (event.target.name === 'review') {
         this.setState({ review: event.target.value })
       }
+
+      this.setState({ submissionStatus: false })
     }
 
 
@@ -76,6 +82,8 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
       })
       .catch(error => console.log('errrrror'))
       this.props.refresh(this.props.reviews, this.props.filteredReviews)
+
+      this.setState({ submissionStatus: true })
     }
 
 
@@ -84,19 +92,24 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
       const result = this.state.filteredReviews.map(review => {
         return <Review details={review} key={this.state.filteredReviews.indexOf(review)} />
       })
-      return (
-        <div>
+
+      if (this.state.submissionStatus) {
+        return <ConfirmationPage />
+      } else {
+        return (
+          <div>
           <form className='review-form'>
             <input className='name' type='text' name='name' placeholder='name (optional)' value={this.state.name} onChange={event => this.handleChange(event)} />
             <input className='review-contents' type='text' name='review' placeholder='review here' value={this.state.review} onChange={event => this.handleChange(event)} />
-            <button className='submit-review-btn' onClick={event => this.handleClick(event)}>Submit Review</button>
+              <button className='submit-review-btn' onClick={event => this.handleClick(event)}>Submit Review</button>
           </form>
           <div className='reviews'>
             {result}
           </div>
 
         </div>
-      )
+        )
+      }
     }
 
     //review form is the container that holds the form for review submission and the individual review components.

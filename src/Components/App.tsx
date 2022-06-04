@@ -4,9 +4,10 @@ import Breweries from './Breweries';
 import Brewery from './Brewery';
 import BreweryDetails from './BreweryDetails'
 import NavBar from './NavBar';
-import { Route, RouteComponentProps } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import ReviewForm from './ReviewForm';
 import { ReviewObject } from './ReviewForm';
+import ConfirmationPage from './ConfirmationPage';
 // import { threadId } from 'worker_threads';
 
 interface match {
@@ -49,7 +50,7 @@ class App extends React.Component<{}, State> {
     error: false,
     query: '',
     reviews: [],
-    reviewsByBrewery: [],
+    reviewsByBrewery: []
   }
 
 
@@ -124,6 +125,7 @@ class App extends React.Component<{}, State> {
     return (
       <main className='app'>
         <NavBar searchBrewery={this.searchBrewery} clearSearchBreweries={this.clearSearchBreweries} query={this.state.query}/>
+        <Switch>
         <Route exact path="/"
           render={() => {
             if (!this.state.searchedBreweries.length && !this.state.query) {
@@ -136,8 +138,9 @@ class App extends React.Component<{}, State> {
           }}
           >
         </Route>
-        <Route path="/:id" render={ ({match}) => <BreweryDetails refresh={this.updateReviews} filteredReviews={this.state.reviewsByBrewery} reviews={this.state.reviews} id={match.params.id} /> } >
+        <Route exact path="/:id" render={ ({match}) => <BreweryDetails refresh={this.updateReviews} filteredReviews={this.state.reviewsByBrewery} reviews={this.state.reviews} id={match.params.id} /> } >
         </Route>
+        </Switch>
       </main>
     )
   }
