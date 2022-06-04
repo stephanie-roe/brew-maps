@@ -31,42 +31,6 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
         filteredReviews: this.props.filteredReviews
     }
 
-    // componentDidMount() {
-    //     // console.log(this.props.id)
-    //   fetch(`http://localhost:3001/api/v1/reviews`)
-    //   .then(response => {
-    //       if (response.ok) {
-    //           return response.json()
-    //       } else {
-    //           throw Error(response.statusText)
-    //       }
-    //   })
-    //   .then(data => {
-    //       const filteredData = data.filter(review => review.id === this.props.id)
-    //       this.setState({ reviews: filteredData })
-    //   })
-    //   .catch(error => console.log("error"))
-    // }
-
-    // componentDidMount() {
-    //     const filteredData = this.props.reviews.filter(review => {
-    //       console.log("revvvv", review);
-    //       console.log("id", this.props.id);
-    //
-    //
-    //       return review.id === this.props.id})
-    //     console.log("filterrr", filteredData);
-    //
-    //     this.setState({ filteredReviews: filteredData })
-    //   }
-
-        // const filteredData = data.filter(review => review.id === this.props.id)
-        // this.setState({ reviews: filteredData })
-      // console.log(data);
-
-      // const filteredData = data.filter(review => review.id === this.props.id)
-      // this.setState({ reviews: filteredData })
-
     componentDidMount() {
       this.setState({ filteredReviews: this.props.filteredReviews })
     }

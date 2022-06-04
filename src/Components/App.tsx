@@ -49,7 +49,7 @@ class App extends React.Component<{}, State> {
     error: false,
     query: '',
     reviews: [],
-    reviewsByBrewery: []
+    reviewsByBrewery: [],
   }
 
 
@@ -70,10 +70,6 @@ class App extends React.Component<{}, State> {
               throw Error(response.statusText)
           }
       })
-      // .then(data => {
-      //   console.log("ressssD", data);
-      //   this.setState({ reviews: data })
-      // })
       .catch(error => console.log("error"))
 
   }
@@ -98,6 +94,13 @@ class App extends React.Component<{}, State> {
 
 
   filterBreweryReviews = (id: string): void => {
+    this.setState({ reviewsByBrewery: [] })
+    fetch('http://localhost:3001/api/v1/reviews')
+      .then(res => res.json())
+      .then(data => {
+        console.log('data from fetch', data)
+        this.setState({reviews: data})}
+        )
     const filteredData = this.state.reviews.filter(review => {
       return review.id === id})
     this.setState({ reviewsByBrewery: filteredData })
