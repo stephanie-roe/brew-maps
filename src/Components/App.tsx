@@ -6,6 +6,7 @@ import BreweryDetails from './BreweryDetails'
 import NavBar from './NavBar';
 import { Route, RouteComponentProps } from 'react-router-dom';
 import ReviewForm from './ReviewForm';
+import { ReviewObject } from './ReviewForm';
 // import { threadId } from 'worker_threads';
 
 interface match {
@@ -52,6 +53,23 @@ class App extends React.Component<{}, State> {
     this.getAllBreweries().then(breweries => this.setState(state => ({ breweries: breweries })))
   }
 
+  async function fetchData(): any {
+    fetch(`http://localhost:3001/api/v1/reviews`)
+      .then(response => {
+          if (response.ok) {
+              return response.json()
+          } else {
+              throw Error(response.statusText)
+          }
+      })
+      .then(data => {
+        console.log("ressssD", data);
+        return data
+      })
+      .catch(error => console.log("error"))
+
+  }
+
   getAllBreweries = (): Promise<Brewery[]> => {
     return fetch('https://api.openbrewerydb.org/breweries')
       .then(response => {
@@ -89,7 +107,7 @@ class App extends React.Component<{}, State> {
           }}
           >
         </Route>
-        <Route path="/:id" render={ ({match}) => <BreweryDetails id={match.params.id} /> } >
+        <Route path="/:id" render={ ({match}) => <BreweryDetails fetchData={this.fetchData} id={match.params.id} /> } >
         </Route>
       </main>
     )

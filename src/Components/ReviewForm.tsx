@@ -4,7 +4,8 @@ import { Route, RouteComponentProps } from 'react-router-dom';
 import Review from './Review';
 
 type ReviewFormProps = {
-    id: string
+    id: string,
+    fetchData: () => any
 }
 
 type ReviewFormState = {
@@ -28,22 +29,33 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
         reviews: []
     }
 
+    // componentDidMount() {
+    //     // console.log(this.props.id)
+    //   fetch(`http://localhost:3001/api/v1/reviews`)
+    //   .then(response => {
+    //       if (response.ok) {
+    //           return response.json()
+    //       } else {
+    //           throw Error(response.statusText)
+    //       }
+    //   })
+    //   .then(data => {
+    //       const filteredData = data.filter(review => review.id === this.props.id)
+    //       this.setState({ reviews: filteredData })
+    //   })
+    //   .catch(error => console.log("error"))
+    // }
+
     componentDidMount() {
-        // console.log(this.props.id)
-      fetch(`http://localhost:3001/api/v1/reviews`)
-      .then(response => {
-          if (response.ok) {
-              return response.json()
-          } else {
-              throw Error(response.statusText)
-          }
-      })
-      .then(data => {
-          const filteredData = data.filter(review => review.id === this.props.id)
-          this.setState({ reviews: filteredData })
-      })
-      .catch(error => console.log("error"))
+      const data = this.props.fetchData()
+        const filteredData = await data.filter(review => review.id === this.props.id)
+        this.setState({ reviews: filteredData })
+      // console.log(data);
+
+      // const filteredData = data.filter(review => review.id === this.props.id)
+      // this.setState({ reviews: filteredData })
     }
+
 
     handleChange = (event: any): void => {
       if (event.target.name === 'name') {
