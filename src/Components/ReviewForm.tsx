@@ -4,6 +4,7 @@ import { Route, RouteComponentProps } from 'react-router-dom';
 import Review from './Review';
 import { Link } from 'react-router-dom';
 import ConfirmationPage from './ConfirmationPage';
+import ErrorMessage from './ErrorMessage';
 
 type ReviewFormProps = {
   refresh: (reviews: ReviewObject[], filteredReviews: ReviewObject[]) => void,
@@ -17,7 +18,9 @@ type ReviewFormState = {
   id: string,
   name: string,
   review: string,
-  submissionStatus: boolean
+  submissionStatus: boolean,
+  error: boolean, 
+  disabled: boolean
 }
 
 export type ReviewObject = {
@@ -32,15 +35,27 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
         name: '',
         review: '',
         filteredReviews: [],
-        submissionStatus: false
+        submissionStatus: false,
+        error: false,
+        disabled: true
     }
 
   componentDidMount() {
     fetch('http://localhost:3001/api/v1/reviews')
-    .then(res => res.json())
+    .then(res => {
+        if (res.ok) {
+           return res.json()
+        } else {
+            throw Error(res.statusText)
+        }
+    })
     .then(data => {
         const filteredRev = data.filter(review => review.id === this.state.id )
         this.setState({ filteredReviews: filteredRev })
+    })
+    .catch(error => {
+        console.log("error");
+        this.setState({error: true})
     })
   }
 
@@ -49,6 +64,10 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
       this.setState({ name: event.target.value })
     } else if (event.target.name === 'review') {
       this.setState({ review: event.target.value })
+    }
+
+    if (this.state.name && this.state.review) {
+        this.setState({ disabled: false })
     }
 
     this.setState({ submissionStatus: false })
@@ -83,7 +102,10 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
       review: this.state.review
       }] })
     })
-    .catch(error => console.log('errrrror'))
+    .catch(error => {
+        console.log('error');
+        this.setState({error: true})
+    })
     this.props.refresh(this.props.reviews, this.props.filteredReviews)
 
     this.setState({ submissionStatus: true })
@@ -91,23 +113,25 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
 
   render() {
     const result = this.state.filteredReviews.map(review => {
-      return <Review details={review} key={this.state.filteredReviews.indexOf(review)} />
+    return <Review details={review} key={this.state.filteredReviews.indexOf(review)} />
     })
-    if (this.state.submissionStatus) {
-      return <ConfirmationPage />
+    if (this.state.error) {
+        return (<ErrorMessage/>)
+    } else if (this.state.submissionStatus) {
+        return (<ConfirmationPage />)
     } else {
-      return (
-        <div>
-        <form className='review-form'>
-          <input className='name' type='text' name='name' placeholder='name (optional)' value={this.state.name} onChange={event => this.handleChange(event)} />
-          <input className='review-contents' type='text' name='review' placeholder='review here' value={this.state.review} onChange={event => this.handleChange(event)} />
-            <button className='submit-review-btn' onClick={event => this.handleClick(event)}>Submit Review</button>
-        </form>
-        <div className='reviews'>
-          {result}
-        </div>
-      </div>
-      )
+        return (
+            <div>
+            <form className='review-form'>
+              <input className='name' type='text' name='name' placeholder='name' value={this.state.name} onChange={event => this.handleChange(event)} required={true} />
+              <input className='review-contents' type='text' name='review' placeholder='review here' value={this.state.review} onChange={event => this.handleChange(event)} required={true} />
+                <button disabled={this.state.disabled} className='submit-review-btn' onClick={event => this.handleClick(event)}>Submit Review</button>
+            </form>
+            <div className='reviews'>
+              {result}
+            </div>
+          </div>
+          )
     }
   }
 }

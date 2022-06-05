@@ -3,6 +3,8 @@ import "../Styles/BreweryDetails.css";
 import ReviewForm from './ReviewForm';
 import { Brewery } from "./App";
 import { ReviewObject } from './ReviewForm';
+import ErrorMessage from './ErrorMessage';
+
 
 type DetailsProps = {
   refresh: (reviews: ReviewObject[], filteredReviews: ReviewObject[]) => void,
@@ -12,7 +14,8 @@ type DetailsProps = {
 }
 
 type DetailsState = {
-  brewery: Brewery
+  brewery: Brewery, 
+  error: boolean
 }
 
 class BreweryDetails extends React.Component<DetailsProps, DetailsState> {
@@ -26,7 +29,8 @@ class BreweryDetails extends React.Component<DetailsProps, DetailsState> {
             postal_code: "",
             country: "",
             phone: "",
-            website_url: "" }
+            website_url: "" },
+        error: false
     }
 
 // add in error handling for when there is no phone number or url
@@ -42,10 +46,16 @@ class BreweryDetails extends React.Component<DetailsProps, DetailsState> {
       .then(data => {
         this.setState({ brewery: data })
       })
-      .catch(error => console.log("Error"))
+      .catch(error => {
+        console.log("Error");
+        this.setState({ error: true })
+      })
     }
 
     render() {
+      if (this.state.error) {
+        return (<ErrorMessage/>)
+      } else  {
         return(
             <div className="brewery-details">
                 <div className="details-card">
@@ -62,6 +72,7 @@ class BreweryDetails extends React.Component<DetailsProps, DetailsState> {
             </div>
         )
     }
+  }
 }
 
 export default BreweryDetails;
