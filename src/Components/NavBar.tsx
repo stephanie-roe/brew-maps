@@ -21,16 +21,7 @@ const NavBar = ({ searchBrewery, clearSearchBreweries, query }: NavBarProps): JS
       <div className='title-container'>
           <h1>Brew Maps</h1>
       </div>
-      <div className='filter-search-container'>
-          <div className='dropdown'>
-              <button className='brew-types'>Filter</button>
-                <form className='dropdown-content'>
-                    <a href='#'>Action</a>
-                    <a href='#'>Adventure</a>
-                    <a href='#'>Horror</a>
-                    <a href='#'>Comedy</a>
-                </form>
-            </div>
+      <div className='search-container'>
             <form>
                 <input id="search" className='search-bar' value={query} type='text' placeholder='ex: Banjo Brewing' onChange={(event) => searchBrewery(event)}></input>
             </form>
