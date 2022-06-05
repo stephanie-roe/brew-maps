@@ -31,111 +31,85 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
         id: this.props.id,
         name: '',
         review: '',
-        // filteredReviews: this.props.filteredReviews,
         filteredReviews: [],
         submissionStatus: false
     }
 
-    componentDidMount() {
-      console.log('component is mounting')
-      // console.log('ReviewForm', this.props.filteredReviews)
-      fetch('http://localhost:3001/api/v1/reviews')
-      .then(res => res.json())
-      .then(data => {
-        // this.setState({ filteredReviews: this.props.filteredReviews })
-        if (!this.state.filteredReviews.length) {
-          console.log('this')
-          
-          const filteredRev = data.filter(review => {
-            console.log('review id: ', review.id)
-            console.log('state id: ', this.state.id)
-           return review.id === this.state.id
-          })
+  componentDidMount() {
+    fetch('http://localhost:3001/api/v1/reviews')
+    .then(res => res.json())
+    .then(data => {
+        const filteredRev = data.filter(review => review.id === this.state.id )
+        this.setState({ filteredReviews: filteredRev })
+    })
+  }
 
-        console.log('data', filteredRev)
-          this.setState({ filteredReviews: filteredRev })
-        } 
-      })
+  handleChange = (event: any): void => {
+    if (event.target.name === 'name') {
+      this.setState({ name: event.target.value })
+    } else if (event.target.name === 'review') {
+      this.setState({ review: event.target.value })
     }
-    // Refresh bug is here above on componentDidMount. We can see that the info is populating in props but the setState is firing before the prop data is finished loading
 
+    this.setState({ submissionStatus: false })
+  }
 
-    handleChange = (event: any): void => {
-      if (event.target.name === 'name') {
-        this.setState({ name: event.target.value })
-      } else if (event.target.name === 'review') {
-        this.setState({ review: event.target.value })
+  handleClick = (event: any): void => {
+    event.preventDefault();
+    fetch(`http://localhost:3001/api/v1/reviews`, {
+      method: 'POST',
+      body: JSON.stringify({
+        "id": this.props.id,
+        "name": this.state.name,
+        "review": this.state.review
+      }),
+      headers: {
+        'Content-Type': 'application/json'
       }
+    })
+    .then(response => {
+      console.log(response)
 
-      this.setState({ submissionStatus: false })
-    }
-
-
-    handleClick = (event: any): void => {
-      event.preventDefault();
-      fetch(`http://localhost:3001/api/v1/reviews`, {
-        method: 'POST',
-        body: JSON.stringify({
-          "id": this.props.id,
-          "name": this.state.name,
-          "review": this.state.review
-        }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      .then(response => {
-        console.log(response)
-
-        if (response.ok) {
-          return response.json()
-        } else {
-          throw Error(response.statusText)
-        }
-      })
-      .then(data => {
-        this.setState({ filteredReviews: [...this.state.filteredReviews, {
-        id: this.props.id,
-        name: this.state.name,
-        review: this.state.review
-       }] })
-      })
-      .catch(error => console.log('errrrror'))
-      this.props.refresh(this.props.reviews, this.props.filteredReviews)
-
-      this.setState({ submissionStatus: true })
-    }
-
-
-
-    render() {
-      const result = this.state.filteredReviews.map(review => {
-        return <Review details={review} key={this.state.filteredReviews.indexOf(review)} />
-      })
-
-      if (this.state.submissionStatus) {
-        return <ConfirmationPage />
+      if (response.ok) {
+        return response.json()
       } else {
-        return (
-          <div>
-          <form className='review-form'>
-            <input className='name' type='text' name='name' placeholder='name (optional)' value={this.state.name} onChange={event => this.handleChange(event)} />
-            <input className='review-contents' type='text' name='review' placeholder='review here' value={this.state.review} onChange={event => this.handleChange(event)} />
-              <button className='submit-review-btn' onClick={event => this.handleClick(event)}>Submit Review</button>
-          </form>
-          <div className='reviews'>
-            {result}
-          </div>
-        </div>
-        )
+        throw Error(response.statusText)
       }
-      
+    })
+    .then(data => {
+      this.setState({ filteredReviews: [...this.state.filteredReviews, {
+      id: this.props.id,
+      name: this.state.name,
+      review: this.state.review
+      }] })
+    })
+    .catch(error => console.log('errrrror'))
+    this.props.refresh(this.props.reviews, this.props.filteredReviews)
 
+    this.setState({ submissionStatus: true })
+  }
+
+  render() {
+    const result = this.state.filteredReviews.map(review => {
+      return <Review details={review} key={this.state.filteredReviews.indexOf(review)} />
+    })
+    if (this.state.submissionStatus) {
+      return <ConfirmationPage />
+    } else {
+      return (
+        <div>
+        <form className='review-form'>
+          <input className='name' type='text' name='name' placeholder='name (optional)' value={this.state.name} onChange={event => this.handleChange(event)} />
+          <input className='review-contents' type='text' name='review' placeholder='review here' value={this.state.review} onChange={event => this.handleChange(event)} />
+            <button className='submit-review-btn' onClick={event => this.handleClick(event)}>Submit Review</button>
+        </form>
+        <div className='reviews'>
+          {result}
+        </div>
+      </div>
+      )
     }
-
-    //review form is the container that holds the form for review submission and the individual review components.
-
-
+  }
 }
 
 export default ReviewForm;
