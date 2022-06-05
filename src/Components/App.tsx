@@ -2,6 +2,7 @@ import React from 'react';
 import '../Styles/App.css';
 import Breweries from './Breweries';
 import Brewery from './Brewery';
+import ErrorMessage from "./ErrorMessage"
 import BreweryDetails from './BreweryDetails'
 import NavBar from './NavBar';
 import { Route, Switch } from 'react-router-dom';
@@ -88,6 +89,7 @@ class App extends React.Component<{}, State> {
       return brewery.name.toUpperCase().includes(event.target.value.toUpperCase());
     });
     this.setState({searchedBreweries: result})
+    // apply conditional logic to target a property of state that decides if there is an error, and then 
   }
   
   clearSearchBreweries = (): void => {
@@ -145,7 +147,7 @@ class App extends React.Component<{}, State> {
             if (!this.state.searchedBreweries.length && !this.state.query) {
               return (<Breweries filterReviews={this.filterBreweryReviews} newBrewery={this.state.breweries} />)
             } else if (!this.state.searchedBreweries.length) {
-              return (<h1>Oops, try again later!</h1>)
+              return (<ErrorMessage/>)
             } else {
               return (<Breweries filterReviews={this.filterBreweryReviews} newBrewery={this.state.searchedBreweries} />)
             }
