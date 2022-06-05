@@ -2,8 +2,8 @@ import React from 'react';
 import '../Styles/ReviewForm.css';
 import { Route, RouteComponentProps } from 'react-router-dom';
 import Review from './Review';
-import { Link } from 'react-router-dom'
-import ConfirmationPage from './ConfirmationPage'
+import { Link } from 'react-router-dom';
+import ConfirmationPage from './ConfirmationPage';
 
 type ReviewFormProps = {
   refresh: (reviews: ReviewObject[], filteredReviews: ReviewObject[]) => void,
@@ -31,13 +31,33 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
         id: this.props.id,
         name: '',
         review: '',
-        filteredReviews: this.props.filteredReviews,
+        // filteredReviews: this.props.filteredReviews,
+        filteredReviews: [],
         submissionStatus: false
     }
 
     componentDidMount() {
-      this.setState({ filteredReviews: this.props.filteredReviews })
+      console.log('component is mounting')
+      // console.log('ReviewForm', this.props.filteredReviews)
+      fetch('http://localhost:3001/api/v1/reviews')
+      .then(res => res.json())
+      .then(data => {
+        // this.setState({ filteredReviews: this.props.filteredReviews })
+        if (!this.state.filteredReviews.length) {
+          console.log('this')
+          
+          const filteredRev = data.filter(review => {
+            console.log('review id: ', review.id)
+            console.log('state id: ', this.state.id)
+           return review.id === this.state.id
+          })
+
+        console.log('data', filteredRev)
+          this.setState({ filteredReviews: filteredRev })
+        } 
+      })
     }
+    // Refresh bug is here above on componentDidMount. We can see that the info is populating in props but the setState is firing before the prop data is finished loading
 
 
     handleChange = (event: any): void => {
@@ -106,10 +126,11 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
           <div className='reviews'>
             {result}
           </div>
-
         </div>
         )
       }
+      
+
     }
 
     //review form is the container that holds the form for review submission and the individual review components.

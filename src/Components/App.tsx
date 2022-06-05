@@ -89,22 +89,35 @@ class App extends React.Component<{}, State> {
     });
     this.setState({searchedBreweries: result})
   }
+  
   clearSearchBreweries = (): void => {
     this.setState({ searchedBreweries: [], error: false, query: "" })
   }
 
-
-  filterBreweryReviews = (id: string): void => {
-    this.setState({ reviewsByBrewery: [] })
-    fetch('http://localhost:3001/api/v1/reviews')
+  refetch = (): any => {
+    return fetch('http://localhost:3001/api/v1/reviews')
       .then(res => res.json())
       .then(data => {
-        console.log('data from fetch', data)
-        this.setState({reviews: data})}
+        console.log('data: ', data)
+        return data}
         )
-    const filteredData = this.state.reviews.filter(review => {
+  }
+
+
+   filterBreweryReviews = (id: string): any => {
+    // fetch('http://localhost:3001/api/v1/reviews')
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     console.log('data from fetch', data)
+    //     this.setState({reviews: data})}
+    //     )
+    this.refetch()
+      .then(data => {
+    const filteredData = data.filter(review => {
       return review.id === id})
+      console.log('filtered data: ', filteredData)
     this.setState({ reviewsByBrewery: filteredData })
+    })
   }
 
   updateReviews = (reviews: ReviewObject[], filteredReviews: ReviewObject[]): void => {
@@ -122,6 +135,7 @@ class App extends React.Component<{}, State> {
 
 
   render() {
+    console.log("App", this.state.reviewsByBrewery)
     return (
       <main className='app'>
         <NavBar searchBrewery={this.searchBrewery} clearSearchBreweries={this.clearSearchBreweries} query={this.state.query}/>
@@ -138,7 +152,7 @@ class App extends React.Component<{}, State> {
           }}
           >
         </Route>
-        <Route exact path="/:id" render={ ({match}) => <BreweryDetails refresh={this.updateReviews} filteredReviews={this.state.reviewsByBrewery} reviews={this.state.reviews} id={match.params.id} /> } >
+        <Route exact path="/:id" render={ ({match}) => <BreweryDetails refresh={this.updateReviews}  filteredReviews={this.state.reviewsByBrewery} reviews={this.state.reviews} id={match.params.id} /> } >
         </Route>
         </Switch>
       </main>
