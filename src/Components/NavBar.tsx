@@ -10,12 +10,6 @@ type NavBarProps = {
   query: string
 }
 
-type NavBarState={
-  query: string,
-  filter: string,
-  counter: number
-}
-
 const NavBar = ({ searchBrewery, clearSearchBreweries, query }: NavBarProps): JSX.Element => {
   return (
     <div className='nav-bar'>

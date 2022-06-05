@@ -9,7 +9,6 @@ type DetailsProps = {
   filteredReviews: ReviewObject[],
   id: string,
   reviews: ReviewObject[]
-
 }
 
 type DetailsState = {
@@ -59,7 +58,7 @@ class BreweryDetails extends React.Component<DetailsProps, DetailsState> {
                     <p className='address'>Address: {`${this.state.brewery.city}, ${this.state.brewery.state} ${this.state.brewery.postal_code}`}</p>
                   </div>
                 </div>
-                <ReviewForm refresh={this.props.refresh} filteredReviews={this.props.filteredReviews} reviews={this.props.reviews} id={this.state.brewery.id}/>
+                  <ReviewForm refresh={this.props.refresh} filteredReviews={this.props.filteredReviews} reviews={this.props.reviews} id={this.props.id}/>
             </div>
         )
     }
