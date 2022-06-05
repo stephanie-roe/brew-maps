@@ -72,8 +72,10 @@ class App extends React.Component<{}, State> {
               throw Error(response.statusText)
           }
       })
-      .catch(error => console.log("error"))
-
+      .catch(error => {
+        console.log("error");
+        this.setState({ error: true })
+      })
   }
 
   getAllBreweries = (): Promise<Brewery[]> => {
@@ -89,11 +91,11 @@ class App extends React.Component<{}, State> {
       return brewery.name.toUpperCase().includes(event.target.value.toUpperCase());
     });
     this.setState({searchedBreweries: result})
-    // apply conditional logic to target a property of state that decides if there is an error, and then 
   }
   
   clearSearchBreweries = (): void => {
-    this.setState({ searchedBreweries: [], error: false, query: "" })
+    this.setState({ searchedBreweries: [], query: "" })
+
   }
 
   refetch = (): any => {
@@ -107,17 +109,10 @@ class App extends React.Component<{}, State> {
 
 
    filterBreweryReviews = (id: string): any => {
-    // fetch('http://localhost:3001/api/v1/reviews')
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     console.log('data from fetch', data)
-    //     this.setState({reviews: data})}
-    //     )
     this.refetch()
       .then(data => {
     const filteredData = data.filter(review => {
       return review.id === id})
-      console.log('filtered data: ', filteredData)
     this.setState({ reviewsByBrewery: filteredData })
     })
   }
@@ -138,27 +133,31 @@ class App extends React.Component<{}, State> {
 
   render() {
     console.log("App", this.state.reviewsByBrewery)
-    return (
-      <main className='app'>
-        <NavBar searchBrewery={this.searchBrewery} clearSearchBreweries={this.clearSearchBreweries} query={this.state.query}/>
-        <Switch>
-        <Route exact path="/"
-          render={() => {
-            if (!this.state.searchedBreweries.length && !this.state.query) {
-              return (<Breweries filterReviews={this.filterBreweryReviews} newBrewery={this.state.breweries} />)
-            } else if (!this.state.searchedBreweries.length) {
-              return (<ErrorMessage/>)
-            } else {
-              return (<Breweries filterReviews={this.filterBreweryReviews} newBrewery={this.state.searchedBreweries} />)
-            }
-          }}
-          >
-        </Route>
-        <Route exact path="/:id" render={ ({match}) => <BreweryDetails refresh={this.updateReviews}  filteredReviews={this.state.reviewsByBrewery} reviews={this.state.reviews} id={match.params.id} /> } >
-        </Route>
-        </Switch>
-      </main>
-    )
+    if (this.state.error) {
+      return (<ErrorMessage />)
+    } else {
+      return (
+        <main className='app'>
+          <NavBar searchBrewery={this.searchBrewery} clearSearchBreweries={this.clearSearchBreweries} query={this.state.query}/>
+          <Switch>
+          <Route exact path="/"
+            render={() => {
+              if (!this.state.searchedBreweries.length && !this.state.query) {
+                return (<Breweries filterReviews={this.filterBreweryReviews} newBrewery={this.state.breweries} />)
+              } else if (!this.state.searchedBreweries.length) {
+                return (<ErrorMessage/>)
+              } else {
+                return (<Breweries filterReviews={this.filterBreweryReviews} newBrewery={this.state.searchedBreweries} />)
+              }
+            }}
+            >
+          </Route>
+          <Route exact path="/:id" render={ ({match}) => <BreweryDetails refresh={this.updateReviews}  filteredReviews={this.state.reviewsByBrewery} reviews={this.state.reviews} id={match.params.id} /> } >
+          </Route>
+          </Switch>
+        </main>
+      )
+    }
   }
 }
 
