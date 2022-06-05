@@ -26,4 +26,11 @@ describe('Home page', () => {
         cy.get('.name').should('contain', 'Banjo Brewing')
     })
 
+    it.only('should show an error when a user searches for nonexistent brewery', () => {
+        cy.get('.search-bar').type('search')
+        cy.get('.error-message').children().should('have.length', 2)
+        cy.get('img').should('have.attr', 'src').should('include', "https://media.giphy.com/media/l46Cl6JOKu0fbiR3O/giphy.gif")
+        cy.get('h1').contains("Something went wrong, please try again!")
+    })
+
 })
