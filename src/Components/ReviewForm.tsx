@@ -40,6 +40,14 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
         disabled: true
     }
 
+    checkName = ():string => {
+        if (this.state.name && this.state.review) {
+          return this.state.name
+        } else {
+          return 'Anonymous'
+        }
+      }
+
   componentDidMount() {
     fetch('http://localhost:3001/api/v1/reviews')
     .then(res => {
@@ -66,7 +74,7 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
       this.setState({ review: event.target.value })
     }
 
-    if (this.state.name && this.state.review) {
+    if (this.state.review) {
         this.setState({ disabled: false })
     }
 
@@ -79,7 +87,7 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
       method: 'POST',
       body: JSON.stringify({
         "id": this.props.id,
-        "name": this.state.name,
+        "name": this.checkName(),
         "review": this.state.review
       }),
       headers: {
