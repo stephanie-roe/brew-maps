@@ -34,13 +34,19 @@
 
 
 ## Features
-
+- Upon page load, the user is presented with 20 different breweries.
+- A user can search for a specific brewery and the breweries will populate on the page based on the user's input.
+- When a user clicks on a brewery, they are taken to a screen with the brewery name and reviews for that brewery.
+- Users can leave their own review on a brewerie.
+- Users can utilize the forward/backward arrows to navigate their history on the site and can share a specific URL pertaining to each brewery.
 
 ## Page Demo
 
 
 ## Possible Future Extensions
-
+- Create a user login
+- Add images for the breweries
+- Allow users to favorite a brewery
 
 
 ## Set Up
