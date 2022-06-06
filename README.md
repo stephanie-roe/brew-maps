@@ -1,46 +1,67 @@
-# Getting Started with Create React App
+# Brew Maps
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- [Introduction](#introduction)
+- [Learning Goals](#learning-goals)
+- [Technologies](#technologies)
+- [Features](#features)
+- [Page Demo](#page-demo)
+- [Future Extensions](#possible-future-extensions)
+- [Set Up](#set-up)
+- [Project Spec](#project-spec)
+- [GitHub Repo](#github-repo)
+- [Deploy Link](#deploy-link)
+- [Additional Resources](#additional-resources)
 
-## Available Scripts
 
-In the project directory, you can run:
+## Introduction
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Learning Goals
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Technologies
+  - React
+  - TypeScript
+  - HTML
+  - CSS
+  - Cypress
+  - Fetch API
+  - Webpack
+  - NPM
+  - Router
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Features
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Page Demo
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Possible Future Extensions
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## Set Up
+1. Fork and clone this repo.
+2. Read this README thoroughly.
+3. Type `cd brew-maps` to move into the root directory.
+4. Run `npm install` to install necessary dependencies.
+5. Run `npm start`.
+6. Copy the url given by running `npm start` and open in your browser.
+7. Run Cypress tests with `npm run cypress` if all dependencies are installed correctly.
+8. Explore the available movies and see their details!
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Project Spec
+- The spec for this project can be found [here](https://frontend.turing.edu/projects/module-3/stretch.html).
+
+## Project GitHub Repo
+- The project repo can be found [here](https://github.com/stephanie-roe/brew-maps).
+
+## Deploy Link
+
+
+## Additional Resources
+- [Figma Wireframe](https://www.figma.com/file/K2LrejI9HbLbFltwvCRq0V/Wireframe-%7C-Stretch-Tech?node-id=3%3A35)
