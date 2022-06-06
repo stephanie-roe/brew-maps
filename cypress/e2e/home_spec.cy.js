@@ -11,8 +11,14 @@ describe('Home page', () => {
         cy.get('.breweries').children().should('have.length', 5)
         cy.get('#banjo-brewing-fayetteville').children().should('have.length', 2)
         cy.get('.name').should('contain', 'Banjo Brewing')
-        // cy.get('.location').children().eq(0).should('contain', 'Fayetteville, West Virgina')
     })
+
+    it('should display an error message if the api call is unsuccessful', () => {
+        cy.visit('http://localhost:3000/badURL')
+        cy.get('.error-message').children().should('have.length', 2)
+        cy.get('img').should('have.attr', 'src').should('include', "https://media.giphy.com/media/l46Cl6JOKu0fbiR3O/giphy.gif")
+        cy.get('h1').contains("Something went wrong, please try again!")
+      })
 
     it('should have a nav bar that includes a search bar and home button', () => {
       cy.get('.home-btn').contains('Home')
