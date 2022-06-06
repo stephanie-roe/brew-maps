@@ -18,14 +18,16 @@
 
 
 ## Learning Goals
-
-
+- Learning how to self-teach a new topic: TypeScript 
+- Successfully implement TypeScript 
+- Build a good understanding of TypeScript
 
 ## Technologies
   - React
   - TypeScript
   - HTML
   - CSS
+  - Express
   - Cypress
   - Fetch API
   - Webpack
