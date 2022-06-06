@@ -32,16 +32,17 @@ describe('Brewery Details', () => {
     cy.get('p').contains("Good beers! Bad service")
   })
 
-  it.only('should be able to submit a review of a brewery', () => {
-    cy.intercept('GET', `https://api.openbrewerydb.org/breweries/banjo-brewing-fayetteville`, {fixture : 'example.json'})
+  it.only('should be able to submit a review of a brewery and reach a confirmation page after successfully leaving a review', () => {
+    cy.intercept('GET', `https://api.openbrewerydb.org/breweries/barrel-brothers-brewing-company-windsor`, {fixture : 'example.json'})
+    cy.intercept('POST', `http://localhost:3001/api/v1/reviews`, {fixture: 'post.json'})
     cy.get('#barrel-brothers-brewing-company-windsor').click()
+    cy.get('.name').type('Kevin')
+    cy.get('.review-contents').type('Awesome beer!')
+    cy.get('.submit-review-btn').click()
+    cy.get('h1').contains('Cheers! Review submitted!!')
+    cy.get('img').should('have.attr', 'src').should('include', "https://media.giphy.com/media/DGWAx8d3IkICs/giphy.gif")
+    cy.get('.home-btn').click()
+    cy.get('#barrel-brothers-brewing-company-windsor').click()
+    cy.get('.reviews').children().should('have.length', 25)
   })
 })
-
-
-// testing Reviews 
-// test that reviews are on the screen 
-// test that we can add a review 
-// test confirmation page 
-  // click on the home button and go to the same brewery to check to see if the reviews increased 
-  // test child components to see that the reviews have increased 
