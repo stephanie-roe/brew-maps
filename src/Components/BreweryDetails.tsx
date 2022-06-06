@@ -60,12 +60,10 @@ class BreweryDetails extends React.Component<DetailsProps, DetailsState> {
             <div className="brewery-details">
                 <div className="details-card">
                   <h2>{this.state.brewery.name}</h2>
-                  <button>{this.state.brewery.brewery_type}</button>
                   <div className="contact-info">
-                    <p>{this.state.brewery.website_url}</p>
+                    <a href={this.state.brewery.website_url} target="_blank">{this.state.brewery.website_url}</a>
                     <p className='phone'>Phone: {this.state.brewery.phone}</p>
-                    <p>{this.state.brewery.street}</p>
-                    <p className='address'>Address: {`${this.state.brewery.city}, ${this.state.brewery.state} ${this.state.brewery.postal_code}`}</p>
+                    <p className='address'>Address: {`${this.state.brewery.street} ${this.state.brewery.city}, ${this.state.brewery.state} ${this.state.brewery.postal_code}`}</p>
                   </div>
                 </div>
                   <ReviewForm refresh={this.props.refresh} filteredReviews={this.props.filteredReviews} reviews={this.props.reviews} id={this.props.id}/>
@@ -76,3 +74,4 @@ class BreweryDetails extends React.Component<DetailsProps, DetailsState> {
 }
 
 export default BreweryDetails;
+

@@ -1,8 +1,16 @@
 * {
   font-family: 'Averia Serif Libre', cursive;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
+}
+
+.app {
+  height: 100vh;
+  margin: 0px;
+  width: 100vw;
 }
 
 h1 {
   text-align: center;
+  font-size: 45px;
 }
+

@@ -129,13 +129,15 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
         return (<ConfirmationPage />)
     } else {
         return (
-            <div>
+            <div className="review-container">
+            <h3>Share Your Thoughts:</h3>
             <form className='review-form'>
-              <input className='name' type='text' name='name' placeholder='name' value={this.state.name} onChange={event => this.handleChange(event)} required={true} />
+              <input className='name-input' type='text' name='name' placeholder='name' value={this.state.name} onChange={event => this.handleChange(event)} required={true} />
               <input className='review-contents' type='text' name='review' placeholder='review here' value={this.state.review} onChange={event => this.handleChange(event)} required={true} />
                 <button disabled={this.state.disabled} className='submit-review-btn' onClick={event => this.handleClick(event)}>Submit Review</button>
             </form>
             <div className='reviews'>
+              <h3>Reviews</h3>
               {result}
             </div>
           </div>
