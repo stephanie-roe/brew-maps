@@ -61,7 +61,7 @@ class BreweryDetails extends React.Component<DetailsProps, DetailsState> {
                 <div className="details-card">
                   <h2>{this.state.brewery.name}</h2>
                   <div className="contact-info">
-                    <a href={this.state.brewery.website_url} target="_blank">{this.state.brewery.website_url}</a>
+                    <p><a href={this.state.brewery.website_url} target="_blank">{this.state.brewery.website_url}</a></p>
                     <p className='phone'>Phone: {this.state.brewery.phone}</p>
                     <p className='address'>Address: {`${this.state.brewery.street} ${this.state.brewery.city}, ${this.state.brewery.state} ${this.state.brewery.postal_code}`}</p>
                   </div>

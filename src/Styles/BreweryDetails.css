@@ -5,7 +5,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 1;
 }
 
 .details-card {
@@ -13,7 +12,7 @@
   height: 30vh;
   display: flex;
   flex-direction: row;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   padding: 5px;
   gap: 60px;
@@ -24,12 +23,18 @@
   height: inherit;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  align-items: flex-end;
 }
 
 p {
   font-size: 20px;
   margin: 5px;
+  text-align: right;
+}
+
+.user-name, 
+.review-message {
+  text-align: left;
 }
 
 
