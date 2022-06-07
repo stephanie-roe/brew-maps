@@ -1,10 +1,8 @@
 .nav-bar{
     display: flex;
     width: 100vw;
-    border: 2px solid red;
     align-items: center;
     justify-content: space-around;
-
 }
 
 button {
@@ -12,12 +10,9 @@ button {
 }
 
 h1 {
-    border: 2px solid green;
+    text-align: center;
 }
 
-.home-btn {
-    border: 2px solid orange;
-}
 
 .brew-types {
     background-color: white;
@@ -27,53 +22,26 @@ h1 {
     border: none;
 }
 
-.dropdown {
-    position: relative;
-    display: inline-block;
-    border: 2px solid blue;
-}
 
-.home-btn-container {
-    border: 2px solid purple;
-}
 
-.filter-search-container,
+.search-container,
 .title-container,
 .home-btn-container {
     width: 30%;
 }
 
-.filter-search-container {
-    border: 2px solid green;
+.search-container {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
 }
 
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    z-index: 1;
-}
 
-.dropdown-content > a:hover {
-    border-bottom: 2px solid pink;
-    background-color: #f1f1f1;
-}
-
-.dropdown-content > a {
-    height: 20%;
-    width: auto;
+.search-bar {
+    border-radius: 30px;
+    padding: 10px 50px;
     text-align: center;
 }
-
-.dropdown:hover > .dropdown-content {
-    display: flex;
-    flex-direction: column;
-}
-
 
 

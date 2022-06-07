@@ -1,7 +1,21 @@
 * {
   font-family: 'Averia Serif Libre', cursive;
+  color: #804C27;
+  /* overflow-x: hidden; */
+}
+
+input {
+  border: solid 1px #804C27;
+}
+
+.app {
+  height: 100vh;
+  margin: 0px;
+  width: 100vw;
 }
 
 h1 {
   text-align: center;
+  font-size: 45px;
 }
+
