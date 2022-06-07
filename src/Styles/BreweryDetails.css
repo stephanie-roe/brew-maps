@@ -2,28 +2,41 @@
   background-color: #FFCB77;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .details-card {
-  /* border: solid 1px black; */
   width: 80vw;
-  height: 50vh;
+  height: 30vh;
   display: flex;
   flex-direction: row;
-  align-items: flex-end;
-  justify-content: space-between;
-  padding: 20px;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  gap: 60px;
 }
 
 .contact-info {
   width: 30%;
   height: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 p {
   font-size: 20px;
+  margin: 5px;
+  text-align: right;
 }
+
+.user-name, 
+.review-message {
+  text-align: left;
+}
+
 
 h2 {
   font-size: 30px;

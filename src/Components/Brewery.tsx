@@ -15,10 +15,10 @@ type BreweryProps = {
 const Brewery = ({ breweryObject, filterReviews }: BreweryProps): JSX.Element => {
   return (
     <Link to={`/${breweryObject.id}`} style={{textDecoration: 'none', color: 'black'}}>
-      <div id={breweryObject.id} className='brewery' onClick={() => filterReviews(breweryObject.id)}>
-        <h2 className='name'>{breweryObject.name}</h2>
-        <p className='location'>{`${breweryObject.city}, ${breweryObject.state}`}</p>
-      </div>
+        <div id={breweryObject.id} className='brewery' onClick={() => filterReviews(breweryObject.id)}>
+          <h2 className='name'>{breweryObject.name}</h2>
+          <p className='location'>{`${breweryObject.city}, ${breweryObject.state}`}</p>
+       </div>
     </Link>
   )
 }

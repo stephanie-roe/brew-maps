@@ -1,4 +1,5 @@
 import React from 'react';
+import "../Styles/ErrorMessage.css"
 
 const ErrorMessage = (): JSX.Element => {
     return (

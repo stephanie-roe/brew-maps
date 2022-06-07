@@ -40,6 +40,14 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
         disabled: true
     }
 
+    checkName = ():string => {
+        if (this.state.name && this.state.review) {
+          return this.state.name
+        } else {
+          return 'Anonymous'
+        }
+      }
+
   componentDidMount() {
     fetch('http://localhost:3001/api/v1/reviews')
     .then(res => {
@@ -66,7 +74,7 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
       this.setState({ review: event.target.value })
     }
 
-    if (this.state.name && this.state.review) {
+    if (this.state.review) {
         this.setState({ disabled: false })
     }
 
@@ -79,7 +87,7 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
       method: 'POST',
       body: JSON.stringify({
         "id": this.props.id,
-        "name": this.state.name,
+        "name": this.checkName(),
         "review": this.state.review
       }),
       headers: {
@@ -121,13 +129,15 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
         return (<ConfirmationPage />)
     } else {
         return (
-            <div>
+            <div className="review-container">
+            <h3>Share Your Thoughts:</h3>
             <form className='review-form'>
-              <input className='name' type='text' name='name' placeholder='name' value={this.state.name} onChange={event => this.handleChange(event)} required={true} />
+              <input className='name-input' type='text' name='name' placeholder='name' value={this.state.name} onChange={event => this.handleChange(event)} required={true} />
               <input className='review-contents' type='text' name='review' placeholder='review here' value={this.state.review} onChange={event => this.handleChange(event)} required={true} />
                 <button disabled={this.state.disabled} className='submit-review-btn' onClick={event => this.handleClick(event)}>Submit Review</button>
             </form>
             <div className='reviews'>
+              <h3>Reviews</h3>
               {result}
             </div>
           </div>
