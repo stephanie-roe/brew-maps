@@ -95,4 +95,4 @@ In addition to the above repo running in your terminal, you will also need to fo
 - The project repo can be found [here](https://github.com/stephanie-roe/brew-maps).
 
 ## Additional Resources
-- [Figma Wireframe](https://www.figma.com/file/K2LrejI9HbLbFltwvCRq0V/Wireframe-%7C-Stretch-Tech?node-id=3%3A35)
+- [Figma Wireframe](https://www.figma.com/files/project/57626021/Team-project?fuid=1093972038475391888)
