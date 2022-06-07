@@ -7,14 +7,12 @@ type ReviewProps = {
 }
 
 const Review = ({ details }: ReviewProps): JSX.Element => {
-  // console.log(details)
   return (
-    <div className='review' id={details.id}>
-      <p className="user-name">{details.name}</p>
-      <p className="review-message">{details.review}</p>
+    <div className='review' id={ details.id }>
+      <p className="user-name">{ details.name }</p>
+      <p className="review-message">{ details.review }</p>
     </div>
   )
 }
-
 
 export default Review;

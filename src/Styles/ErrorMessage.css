@@ -1,9 +1,9 @@
 .error-message {
-    display: flex;
-    height:100%;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #8591B7;
-    padding: 20px;
+  display: flex;
+  height:100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #8591B7;
+  padding: 20px;
 }
