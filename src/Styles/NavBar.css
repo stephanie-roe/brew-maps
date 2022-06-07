@@ -1,47 +1,41 @@
-.nav-bar{
-    display: flex;
-    width: 100vw;
-    align-items: center;
-    justify-content: space-around;
+.nav-bar {
+  display: flex;
+  width: 100vw;
+  align-items: center;
+  justify-content: space-around;
 }
 
 button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 h1 {
-    text-align: center;
+  text-align: center;
 }
-
 
 .brew-types {
-    background-color: white;
-    color: black;
-    padding: 0.8rem;
-    font-size: 1.6rem;
-    border: none;
+  background-color: white;
+  color: black;
+  padding: 0.8rem;
+  font-size: 1.6rem;
+  border: none;
 }
-
-
 
 .search-container,
 .title-container,
 .home-btn-container {
-    width: 30%;
+  width: 30%;
 }
 
 .search-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
 }
-
 
 .search-bar {
-    border-radius: 30px;
-    padding: 10px 50px;
-    text-align: center;
+  border-radius: 30px;
+  padding: 10px 50px;
+  text-align: center;
 }
-
-

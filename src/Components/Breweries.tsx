@@ -15,15 +15,14 @@ type BreweriesProps = {
 const Breweries = ({ newBrewery, filterReviews }: BreweriesProps): JSX.Element => {
   const result = newBrewery.map(singleBrewery => {
     return (
-      <Brewery filterReviews={filterReviews} breweryObject={singleBrewery} key={newBrewery.indexOf(singleBrewery)} />
+      <Brewery filterReviews={ filterReviews } breweryObject={ singleBrewery } key={ newBrewery.indexOf(singleBrewery) } />
     )
   })
   return (
     <div className='breweries'>
-      {result}
+      { result }
     </div>
   )
 }
-
 
 export default Breweries;
