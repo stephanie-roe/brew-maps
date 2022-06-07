@@ -69,12 +69,12 @@ Brew Maps is a group project for Module 3 that is a cummulation of Module 3's le
 
 
 ## Front End Set Up Instructions
-1. Fork and clone this repo.
-2. Read this README thoroughly.
+1. Fork and clone [this](https://github.com/stephanie-roe/brew-maps/tree/main) repo.
 3. Type `cd brew-maps` to move into the root directory.
 4. Run `npm install` to install necessary dependencies.
 5. Run `npm start`.
 6. Copy the url given by running `npm start` and open in your browser.
+    - URL: git@github.com:stephanie-roe/brew-maps.git
 7. Run Cypress tests with `npm run cypress` if all dependencies are installed correctly.
     - Before running Cypress, restart the back end server (instructions below). 
 8. Explore the available movies and see their details!
