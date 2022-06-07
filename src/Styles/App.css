@@ -1,6 +1,11 @@
 * {
   font-family: 'Averia Serif Libre', cursive;
+  color: #804C27;
   /* overflow-x: hidden; */
+}
+
+input {
+  border: solid 1px #804C27;
 }
 
 .app {
