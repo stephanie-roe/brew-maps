@@ -1,46 +1,108 @@
-# Getting Started with Create React App
+# Brew Maps
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- [Contributors](#contributors)
+- [Introduction](#introduction)
+- [Learning Goals](#learning-goals)
+- [Technologies](#technologies)
+- [Features](#features)
+- [Page Demo](#page-demo)
+- [Future Extensions](#possible-future-extensions)
+- [Set Up](#set-up)
+- [Project Spec](#project-spec)
+- [GitHub Repo](#github-repo)
+- [Deploy Link](#deploy-link)
+- [Additional Resources](#additional-resources)
 
-## Available Scripts
+## Contributors
 
-In the project directory, you can run:
+[Rachel Hill](https://github.com/rachellhill)
 
-### `npm start`
+[Stephanie Roe](https://github.com/stephanie-roe)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[Nicholas Ao](https://github.com/aominhlong)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+[Igor Decess](https://github.com/userigorgithub)
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Introduction
 
-### `npm run build`
+Save yourself time trying to find a good brewery and use Brew Maps, where you can find a perfect brew for you. You can scroll through the list of breweries and look at their reviews and where they are located. Want to see if a brewery's is good? Search for it using our responsive search bar and look at the reviews. 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Brew Maps is a group project for Module 3 that is a cummulation of Module 3's lessons on React, Express, Cypress E2E testing, and Router. 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Learning Goals
 
-### `npm run eject`
+- Learning how to self-teach a new topic: TypeScript 
+- Successfully implement TypeScript 
+- Build a good understanding of TypeScript
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Technologies
+  - React
+  - TypeScript
+  - HTML
+  - CSS
+  - Express
+  - Cypress
+  - Fetch API
+  - Webpack
+  - NPM
+  - Router
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Features
 
-## Learn More
+- Upon page load, the user is presented with 20 different breweries.
+- A user can search for a specific brewery and the breweries will populate on the page based on the user's input.
+- When a user clicks on a brewery, they are taken to a screen with the brewery name and reviews for that brewery.
+- Users can leave their own review on a brewery.
+- Users can utilize the forward/backward arrows to navigate their history on the site and can share a specific URL pertaining to each brewery.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Page Demo
+
+![home search gif](./src/Styles/assets/home-search.gif)
+
+![add reviews](./src/Styles/assets/add-reviews.gif)
+
+## Possible Future Extensions
+
+- Create a user login
+- Add images for the breweries
+- Allow users to favorite a brewery
+
+
+## Front End Set Up Instructions
+
+1. Fork and clone [this](https://github.com/stephanie-roe/brew-maps/tree/main) repo.
+3. Type `cd brew-maps` to move into the root directory.
+4. Run `npm install` to install necessary dependencies.
+5. Run `npm start`.
+6. Copy the url given by running `npm start` and open in your browser.
+    - URL: `git@github.com:stephanie-roe/brew-maps.git`
+7. Run Cypress tests with `npm run cypress` if all dependencies are installed correctly.
+    - Before running Cypress, restart the back end server (instructions below). 
+8. Explore the available movies and see their details!
+
+## Back End Set Up Instructions
+
+In addition to the above repo running in your terminal, you will also need to follow the steps below to start the back end api that we created.
+1. Clone down [THIS](https://github.com/stephanie-roe/brew-maps-api) repo
+2. `cd` into `brew-maps-api`
+3. Run `npm init`
+4. Run `npm i express`
+5. Run `node server.js` to start the back end server
+
+## Project Spec
+
+- The spec for this project can be found [here](https://frontend.turing.edu/projects/module-3/stretch.html).
+
+
+## Project GitHub Repo
+
+- The project repo can be found [here](https://github.com/stephanie-roe/brew-maps).
+
+## Additional Resources
+
+- [Figma Project Board & Wireframe](https://www.figma.com/files/project/57626021/Brew-Maps-Team-Project?fuid=1093972038475391888)
