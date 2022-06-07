@@ -19,7 +19,7 @@ type ReviewFormState = {
   name: string,
   review: string,
   submissionStatus: boolean,
-  error: boolean, 
+  error: boolean,
   disabled: boolean
 }
 
@@ -30,40 +30,40 @@ export type ReviewObject = {
 }
 
 class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
-    state: ReviewFormState = {
-        id: this.props.id,
-        name: '',
-        review: '',
-        filteredReviews: [],
-        submissionStatus: false,
-        error: false,
-        disabled: true
-    }
+  state: ReviewFormState = {
+    id: this.props.id,
+    name: '',
+    review: '',
+    filteredReviews: [],
+    submissionStatus: false,
+    error: false,
+    disabled: true
+  }
 
-    checkName = ():string => {
-        if (this.state.name && this.state.review) {
-          return this.state.name
-        } else {
-          return 'Anonymous'
-        }
-      }
+  checkName = ():string => {
+    if (this.state.name && this.state.review) {
+      return this.state.name
+    } else {
+      return 'Anonymous'
+    }
+  }
 
   componentDidMount() {
     fetch('http://localhost:3001/api/v1/reviews')
     .then(res => {
-        if (res.ok) {
-           return res.json()
-        } else {
-            throw Error(res.statusText)
-        }
+      if (res.ok) {
+        return res.json()
+      } else {
+        throw Error(res.statusText)
+      }
     })
     .then(data => {
-        const filteredRev = data.filter(review => review.id === this.state.id )
-        this.setState({ filteredReviews: filteredRev })
+      const filteredRev = data.filter(review => review.id === this.state.id )
+      this.setState({ filteredReviews: filteredRev })
     })
     .catch(error => {
-        console.log("error");
-        this.setState({error: true})
+      console.log("error");
+      this.setState({ error: true })
     })
   }
 
@@ -73,16 +73,14 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
     } else if (event.target.name === 'review') {
       this.setState({ review: event.target.value })
     }
-
     if (this.state.review) {
-        this.setState({ disabled: false })
+      this.setState({ disabled: false })
     }
-
     this.setState({ submissionStatus: false })
   }
 
   handleClick = (event: any): void => {
-    event.preventDefault();
+    event.preventDefault()
     fetch(`http://localhost:3001/api/v1/reviews`, {
       method: 'POST',
       body: JSON.stringify({
@@ -95,8 +93,6 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
       }
     })
     .then(response => {
-      console.log(response)
-
       if (response.ok) {
         return response.json()
       } else {
@@ -105,43 +101,41 @@ class ReviewForm extends React.Component<ReviewFormProps, ReviewFormState> {
     })
     .then(data => {
       this.setState({ filteredReviews: [...this.state.filteredReviews, {
-      id: this.props.id,
-      name: this.state.name,
-      review: this.state.review
+        id: this.props.id,
+        name: this.state.name,
+        review: this.state.review
       }] })
     })
     .catch(error => {
-        console.log('error');
-        this.setState({error: true})
+      this.setState({error: true})
     })
     this.props.refresh(this.props.reviews, this.props.filteredReviews)
-
     this.setState({ submissionStatus: true })
   }
 
   render() {
     const result = this.state.filteredReviews.map(review => {
-    return <Review details={review} key={this.state.filteredReviews.indexOf(review)} />
+    return <Review details={ review } key={ this.state.filteredReviews.indexOf(review) } />
     })
     if (this.state.error) {
-        return (<ErrorMessage/>)
+      return (<ErrorMessage/>)
     } else if (this.state.submissionStatus) {
-        return (<ConfirmationPage />)
+      return (<ConfirmationPage />)
     } else {
-        return (
-            <div className="review-container">
-            <h3>Share Your Thoughts:</h3>
-            <form className='review-form'>
-              <input className='name-input' type='text' name='name' placeholder='name' value={this.state.name} onChange={event => this.handleChange(event)} required={true} />
-              <input className='review-contents' type='text' name='review' placeholder='review here' value={this.state.review} onChange={event => this.handleChange(event)} required={true} />
-                <button disabled={this.state.disabled} className='submit-review-btn' onClick={event => this.handleClick(event)}>Submit Review</button>
-            </form>
-            <div className='reviews'>
-              <h3>Reviews</h3>
-              {result}
-            </div>
+      return (
+        <div className="review-container">
+          <h3>Share Your Thoughts:</h3>
+          <form className='review-form'>
+            <input className='name-input' type='text' name='name' placeholder='name' value={ this.state.name } onChange={event => this.handleChange(event)} required={true} />
+            <input className='review-contents' type='text' name='review' placeholder='review here' value={ this.state.review } onChange={event => this.handleChange(event)} required={true} />
+            <button disabled={ this.state.disabled } className='submit-review-btn' onClick={event => this.handleClick(event)}>Submit Review</button>
+          </form>
+          <div className='reviews'>
+            <h3>Reviews</h3>
+            { result }
           </div>
-          )
+        </div>
+      )
     }
   }
 }

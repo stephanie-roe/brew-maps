@@ -18,7 +18,7 @@ describe('Brewery Details', () => {
   })
 
   it('should be able to view a brewerys details', () => {
-    cy.intercept('GET', `https://api.openbrewerydb.org/breweries/banjo-brewing-fayetteville`, {fixture : 'example.json'})
+    cy.get('#banjo-brewing-fayetteville').click()
     cy.get('h2').contains('Banjo Brewing')
     cy.get('.phone').contains('3042164231')
     cy.get('.address').contains('Fayetteville, West Virginia 25840')
@@ -35,11 +35,11 @@ describe('Brewery Details', () => {
   it('should be able to submit a review of a brewery and reach a confirmation page after successfully leaving a review', () => {
     cy.intercept('GET', `https://api.openbrewerydb.org/breweries/barrel-brothers-brewing-company-windsor`, {fixture : 'barrel-brothers-brewing-data.json'})
     cy.get('#barrel-brothers-brewing-company-windsor').click()
-    cy.get('.name').type('Kevin')
+    cy.get('.name-input').type('Kevin')
     cy.get('.review-contents').type('Awesome beer!')
     cy.get('.submit-review-btn').click()
     cy.intercept('POST', `http://localhost:3001/api/v1/reviews`, {fixture: 'post.json'})
-    cy.get('h1').contains('Cheers! Review submitted!!')
+    cy.get('h1').contains('Cheers! Review submitted!')
     cy.get('img').should('have.attr', 'src').should('include', "https://media.giphy.com/media/DGWAx8d3IkICs/giphy.gif")
     cy.get('.home-btn').click()
     cy.get('#barrel-brothers-brewing-company-windsor').click()
