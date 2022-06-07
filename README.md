@@ -24,6 +24,7 @@ Brew Maps is a group project for Module 3 that is a cummulation of Module 3's le
 - Successfully implement TypeScript 
 - Build a good understanding of TypeScript
 
+
 ## Technologies
   - React
   - TypeScript
@@ -43,6 +44,7 @@ Brew Maps is a group project for Module 3 that is a cummulation of Module 3's le
 - When a user clicks on a brewery, they are taken to a screen with the brewery name and reviews for that brewery.
 - Users can leave their own review on a brewerie.
 - Users can utilize the forward/backward arrows to navigate their history on the site and can share a specific URL pertaining to each brewery.
+
 
 ## Page Demo
 
@@ -67,8 +69,10 @@ Brew Maps is a group project for Module 3 that is a cummulation of Module 3's le
 ## Project Spec
 - The spec for this project can be found [here](https://frontend.turing.edu/projects/module-3/stretch.html).
 
+
 ## Project GitHub Repo
 - The project repo can be found [here](https://github.com/stephanie-roe/brew-maps).
+
 
 ## Deploy Link
 
